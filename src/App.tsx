@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  // GizmoHelper,
+  // GizmoViewport,
+  OrbitControls,
+  Stars,
+} from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import React from "react";
+import ShaderObj from "./ShaderObj";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div style={{ width: "100vw", height: "100vh" }}>
+      <Canvas
+        camera={{
+          position: [0, 0, 2],
+          aspect: window.innerWidth / window.innerHeight,
+          near: 0.1,
+          far: 2000,
+          fov: 50,
+        }}
+      >
+        <Stars />
+        <color attach="background" args={["#000"]} />
+        <OrbitControls attach={"orbitControls"} />
+        <ShaderObj />
+        {/* <axesHelper args={[0.5]} />
+        <GizmoHelper
+          alignment="bottom-left"
+          margin={[80, 80]}
+          onUpdate={() => {}}
         >
-          Learn React
-        </a>
-      </header>
+          <GizmoViewport
+            axisColors={["#f00", "#398400", "#00f"]}
+            labelColor="#fff"
+          />
+        </GizmoHelper> */}
+      </Canvas>
     </div>
   );
-}
+};
 
 export default App;
